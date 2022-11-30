@@ -13,7 +13,7 @@ end
 function nextgen_stp_de(du,u,p,t)
     @unpack ΔE,ΔI,η_0E,η_0I,τE,τI,αEE,αIE,αEI,αII,κSEE,κSIE,κSEI,
     κSII,κVEE,κVIE,κVEI,κVII,VsynEE,VsynIE,VsynEI,VsynII,κ = p
-    println(t)
+ 
     Threads.@threads for i = 1:N
 
 

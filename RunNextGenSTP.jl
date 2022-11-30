@@ -1,6 +1,6 @@
 using DifferentialEquations,Plots,Parameters,LinearAlgebra,JLD,Statistics
 include("functions.jl")
-include("GlobalFunctions/_includes.jl")
+include("_globalFunctions/_includes.jl")
 
 
 const SC,dist,lags,N,FC,missingROIs = networksetup(13,0.1;digits=10,nSC=2,nFC=1,N=140)
@@ -9,7 +9,7 @@ meanFC,missingROI = get_mean_all_functional_data(;ROI=140,type="control")
 end
 NGp = NextGen2PopParams()
 
-NGp.η_0I = -13.2
+NGp.η_0I = -20.0
 NGp.κ=0.0203
 
 tspan = (0.,30000.)
