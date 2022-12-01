@@ -6,12 +6,12 @@ include("../_globalFunctions/_includes.jl")
 
 NGp = NextGen2PopParams()
 
-NGp.η_0I = -20.
+NGp.η_0I = -12.
 NGp.κ=0.0203
 
 tspan = (0.,30000.)
-const AMP=0
-const fr = 5.
+const AMP=20
+const fr = 10.
 
 
 u0 = rand(12)
@@ -19,7 +19,7 @@ u0 = rand(12)
 u0[1] = 2.257
 u0[2] = 0.036776
 u0[3] = 1.6943
-u0[4] = 0.98019
+u0[4] = -0.98019
 u0[5] = 3.3855
 u0[6] = u0[5]
 u0[7] = 2.257
@@ -34,9 +34,9 @@ u0[12] = u0[11]
 
 p = NGp
 prob = ODEProblem(nextgen_stp_de,u0,tspan,p)
-sol = solve(prob,maxiters=10e20,saveat=0:0.1:tspan[2])
+sol = solve(prob,BS3(),maxiters=10e20,saveat=0:0.1:tspan[2])
 
 
-plot(sol[1,end-1000:end])
+plot(sol[1,99000:1:101000])
 
 

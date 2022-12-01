@@ -35,7 +35,7 @@ function nextgen_stp_de(du,u,p,t)
         gII=u[i+10N]
         pII=u[i+11N]
 
-        if i == 39 && (10000 < t < 10030)
+        if i == 39 && (10000 < t < 10100)
             s = AMP*sin(fr*t)
         else
             s = 0.0;

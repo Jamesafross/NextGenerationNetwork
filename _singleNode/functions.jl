@@ -29,20 +29,20 @@ function nextgen_stp_de(du,u,p,t)
         gII=u[11]
         pII=u[12]
 
-        if  (10000 < t < 10030)
+        if  (10000 < t < 10100)
             s = AMP*sin(fr*t)
         else
             s = 0.0;
         end
         
         #rE
-        du[1] =(1. /τE)*(-gEE*rE -gEI*rE - κVEE*rE - κVEI*rE +2. * rE * vE + (ΔE / (τE*pi)))
+        du[1] =(1. /τE)*(-gEE*rE -gEI*rE + 2. * rE * vE + (ΔE / (τE*pi)))
         #rI
-        du[2] =(1. /τI)*(-gIE*rI - gII*rI -κVIE*rI - κVII*rI + 2. * rI * vI + (ΔI / (τI*pi)))
+        du[2] =(1. /τI)*(-gIE*rI + 2. * rI * vI + (ΔI / (τI*pi)))
         #vE
-        du[3] =(1. /τE)*(gEE*(VsynEE - vE) + gEI*(VsynEI - vE) + κVEI*(vI - vE) - (τE^2)*(pi^2) * (rE^2.) +  vE^2. + η_0E + s )
+        du[3] =(1. /τE)*(gEE*(VsynEE - vE) + gEI*(VsynEI - vE) - (τE^2)*(pi^2) * (rE^2.) +  vE^2. + η_0E +s)
         #vI
-        du[4] =(1. /τI)*(gIE*(VsynIE - vI) + gII*(VsynII - vI) + κVIE*(vE - vI) - (τI^2)*(pi^2)* (rI^2.) + vI^2. + η_0I + s )
+        du[4] =(1. /τI)*(gIE*(VsynIE - vI) + gII*(VsynII - vI) - (τI^2)*(pi^2) * (rI^2.) + vI^2. + η_0I +s)
         #gEE
         du[5] = αEE * (-gEE + pEE)
         #pEE 
