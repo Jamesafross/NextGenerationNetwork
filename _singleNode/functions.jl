@@ -35,14 +35,20 @@ function nextgen_stp_de(du,u,p,t)
             s = 0.0;
         end
         
+        if t < 9000
+            τisp=0.0
+        else
+            τisp=0.00
+        end 
+
         #rE
         du[1] =(1. /τE)*(-gEE*rE -gEI*rE + 2. * rE * vE + (ΔE / (τE*pi)))
         #rI
-        du[2] =(1. /τI)*(-gIE*rI + 2. * rI * vI + (ΔI / (τI*pi)))
+        du[2] =(1. /τI)*(-gIE*rI - gII*rI + 2. * rI * vI + (ΔI / (τI*pi)))
         #vE
         du[3] =(1. /τE)*(gEE*(VsynEE - vE) + gEI*(VsynEI - vE) - (τE^2)*(pi^2) * (rE^2.) +  vE^2. + η_0E +s)
         #vI
-        du[4] =(1. /τI)*(gIE*(VsynIE - vI) + gII*(VsynII - vI) - (τI^2)*(pi^2) * (rI^2.) + vI^2. + η_0I +s)
+        du[4] =(1. /τI)*(gIE*(VsynIE - vI) + gII*(VsynII - vI) - (τI^2)*(pi^2) * (rI^2.) + vI^2. + η_0I)
         #gEE
         du[5] = αEE * (-gEE + pEE)
         #pEE 
@@ -54,11 +60,15 @@ function nextgen_stp_de(du,u,p,t)
         #gEI
         du[9] = αEI * (-gEI + pEI)
         #pEI 
-        du[10] = αEI * (-pEI + κSEI * rI)
+        du[10] = αEI * (-pEI + u[13]* rI)
         #gII
         du[11] = αII * (-gII + pII)
         #pII
         du[12] = αII * (-pII + κSII * rI)
+
+        du[13] = τisp*((rI-0.7496555947801044)*(rE - rI))
+
+
 end
 
 
@@ -73,10 +83,10 @@ end
     αIE::R = 1.4
     αEI::R = 0.7
     αII::R = 0.4
-    κSEE::R = 1.5
-    κSIE::R = 1.
-    κSEI::R = 2.
-    κSII::R = 3.
+    κSEE::R = 3.0
+    κSIE::R = 2.
+    κSEI::R = 1.
+    κSII::R = 1.5
     κVEE::R = 0.
     κVIE::R = 0.
     κVEI::R = 0.

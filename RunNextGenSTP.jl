@@ -9,18 +9,20 @@ meanFC,missingROI = get_mean_all_functional_data(;ROI=140,type="control")
 end
 NGp = NextGen2PopParams()
 
-NGp.η_0I = -12.86
-NGp.κ=0.02
+NGp.η_0I = -12.0
+NGp.κSEE = 1.8
+NGp.κ=0.01
 
 tspan = (0.,30000.)
-const AMP=80
-const fr = 10.
+const AMP=1
+const fr = 5.
 const W = SC
 
 u0 = rand(N*12)
 #u0[39] = 100.
 
 p = NGp
+
 prob = ODEProblem(nextgen_stp_de,u0,tspan,p)
 sol = solve(prob,maxiters=10e20,saveat=0:0.1:tspan[2])
 
